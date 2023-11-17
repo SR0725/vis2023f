@@ -1,0 +1,14 @@
+{
+  "name": "e232d33c0b6de0b5",
+  "main": "e232d33c0b6de0b5@25.js",
+  "version": "25.0.0",
+  "homepage": "https://observablehq.com/d/e232d33c0b6de0b5",
+  "author": {
+    "name": "Ray's Workspace",
+    "url": "https://observablehq.com/@ray3-ws"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4 - 5"
+  }
+}
