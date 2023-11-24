@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>title</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        border: 2px solid white; /* rgba(217,140,144,1) */
+        font-size: 12pt;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      td,
+      th {
+        border: 1px solid white;
+        padding: 2px 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="downloadButton">Download CSV</button>
+    <table id="gradesTable">
+      <thead>
+        <tr>
+          <td>序號</td>
+          <td>班級</td>
+          <td>學號</td>
+          <td>中文姓名</td>
+          <td>GitHub 帳號</td>
+          <td>作業一</td>
+          <td>作業二</td>
+          <td>作業三</td>
+          <td>作業四</td>
+          <td>作業五</td>
+          <td>作業六</td>
+          <td>作業七</td>
+          <td>作業八</td>
+          <td>作業九</td>
+          <td>作業十</td>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <script>
+      let dummyData = null;
+
+      const randomElement = (arr) =>
+        arr[Math.floor(Math.random() * arr.length)];
+      const randomNumber = (min, max) =>
+        Math.floor(Math.random() * (max - min) + min);
+      const padNumber = (num, length) => num.toString().padStart(length, "0");
+
+      const getRandomChineseName = () => {
+        const firstNameList = String.fromCodePoint(
+          Math.round(Math.random() * 20901) + 19968
+        );
+
+        const lastName =
+          String.fromCodePoint(Math.round(Math.random() * 20901) + 19968) +
+          String.fromCodePoint(Math.round(Math.random() * 20901) + 19968);
+        return randomElement(firstNameList) + lastName;
+      };
+
+      const generateRandomGitHubAccount = () => {
+        const chars =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        return Array.from({ length: 10 }, () => randomElement(chars)).join("");
+      };
+
+      const generateRandomGrade = () => randomNumber(0, 11);
+
+      const generateDummyData = (numStudents) =>
+        Array.from({ length: numStudents }, (_, i) => {
+          const departments = [
+            "資工系",
+            "資工所",
+            "電資AI",
+            "電資資安",
+            "創新AI",
+          ];
+          const departmentCode = ["590", "598", "C52", "C53", "C71"];
+          const year = [109, 110, 111, 112];
+          const grade = ["三", "四", "碩一", "碩二"];
+
+          const classIndex = randomNumber(0, 4);
+          const temp = Math.floor(Math.random() * grade.length);
+          const selectedGrade = grade[temp];
+          const className = departments[classIndex] + selectedGrade;
+          // 組合學號
+          const studentId =
+            year[grade.indexOf(selectedGrade)] +
+            departmentCode[classIndex] +
+            padNumber(randomNumber(1, 999), 3);
+
+          const csvContent = "班級,學號,GitHub帳號";
+          const studentName = getRandomChineseName();
+          const githubAccount = generateRandomGitHubAccount();
+          const grades = Array.from({ length: 10 }, generateRandomGrade);
+
+          return [
+            i + 1,
+            className,
+            studentId,
+            studentName,
+            githubAccount,
+            ...grades,
+          ];
+        });
+
+      dummyData = generateDummyData(120);
+
+      const convertToCSV = (data) =>
+        "data:text/csv;charset=utf-8," +
+        encodeURIComponent(data.map((row) => row.join(",")).join("\n"));
+
+      const downloadCSV = () => {
+        const csvContent = convertToCSV(dummyData);
+
+        const link = document.createElement("a");
+        link.href = csvContent;
+        link.download = "data.csv";
+        link.click();
+      };
+
+      document
+        .getElementById("downloadButton")
+        .addEventListener("click", downloadCSV);
+
+      const createTable = () => {
+        const gradesTable = document.getElementById("gradesTable");
+        const tbody = gradesTable.getElementsByTagName("tbody")[0];
+
+        dummyData.forEach((rowData) => {
+          const row = document.createElement("tr");
+          rowData.forEach((cellData) => {
+            const cell = document.createElement("td");
+            cell.textContent = cellData;
+            row.appendChild(cell);
+          });
+          tbody.appendChild(row);
+        });
+      };
+
+      createTable();
+    </script>
+  </body>
+</html>
