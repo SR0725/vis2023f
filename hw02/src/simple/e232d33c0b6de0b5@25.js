@@ -14,6 +14,7 @@ function _plot1(Inputs) {
     mr: Inputs.range([0, 100], { label: "marginRight", step: 1 }),
     mb: Inputs.range([0, 100], { label: "marginBottom", step: 1 }),
     ml: Inputs.range([0, 100], { label: "marginLeft", step: 1 }),
+    start: Inputs.checkbox(false, { label: "start" }),
   });
 }
 
