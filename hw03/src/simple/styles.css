@@ -1,0 +1,53 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.container {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1px; /* 調整 checkbox 與內容的間距 */
+}
+.grid-item {
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.grid-item img {
+  width: 100%;
+}
+
+.show-image {
+  margin-top: 10px;
+}
+
+.point {
+  width: 25px;
+  height: 25px;
+  background-image: url("../img/me.jpg");
+  background-size: 25px 25px;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.history-point {
+  width: 5px;
+  height: 5px;
+  background-color: blue; /* 可以根據需要更改顏色 */
+  border-radius: 50%;
+  position: absolute;
+}
