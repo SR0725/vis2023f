@@ -5,7 +5,9 @@ function _1(md) {
 }
 
 function _simple(FileAttachment) {
-  return FileAttachment("../output.json").json();
+  return FileAttachment(
+    "https://sr0725.github.io/vis2023f/hw05/src/output.json"
+  ).json();
 }
 
 function _url_list() {
@@ -285,10 +287,7 @@ export default function define(runtime, observer) {
     [
       "output.json",
       {
-        url: new URL(
-          "./files/a30e5d0f18d94a874386e6ec75cab5a2d0d4d81a6c6185176e4b32fa1d342e5da845dd2373bed8332caf06e1e500c3544df992a3fad444dcf87c49bc58bef661.json",
-          import.meta.url
-        ),
+        url: new URL("../output.json", import.meta.url),
         mimeType: "application/json",
         toString,
       },
