@@ -5,7 +5,7 @@ function _1(md) {
 }
 
 function _simple_data(FileAttachment) {
-  return FileAttachment("../output.json").json();
+  return FileAttachment("output.json").json();
 }
 
 function _drag(d3) {
