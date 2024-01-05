@@ -5,9 +5,7 @@ function _1(md) {
 }
 
 function _simple(FileAttachment) {
-  return FileAttachment(
-    "https://sr0725.github.io/vis2023f/hw05/src/output.json"
-  ).json();
+  return FileAttachment("../output.json").json();
 }
 
 function _url_list() {
